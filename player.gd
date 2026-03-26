@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 const GRAVITY: float = 1800.0
-const JUMP_VELOCITY: float = -600.0
+const JUMP_VELOCITY: float = -900.0
 
 func _ready() -> void:
 	add_to_group("player")
