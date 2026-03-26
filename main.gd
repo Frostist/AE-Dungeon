@@ -35,7 +35,7 @@ func _process(delta: float) -> void:
 	speed_elapsed += delta
 	if speed_elapsed >= 5.0:
 		speed_elapsed -= 5.0
-		GameState.speed += 10.0
+		GameState.speed = minf(GameState.speed + 10.0, GameState.MAX_SPEED)
 
 	interval_elapsed += delta
 	if interval_elapsed >= 10.0:
