@@ -85,7 +85,18 @@ func _on_response(_result: int, _code: int, _headers: PackedStringArray, body: P
 	if parsed == null or not parsed.has("candidates"):
 		return
 	var inner: String = parsed["candidates"][0]["content"]["parts"][0]["text"]
-	var action_data = JSON.parse_string(inner.strip_edges())
+	
+	# Strip markdown code fences if present
+	var cleaned_text = inner.strip_edges()
+	if cleaned_text.begins_with("```"):
+		var first_newline = cleaned_text.find("\n")
+		if first_newline > 0:
+			cleaned_text = cleaned_text.substr(first_newline + 1)
+		if cleaned_text.ends_with("```"):
+			cleaned_text = cleaned_text.substr(0, cleaned_text.length() - 3)
+		cleaned_text = cleaned_text.strip_edges()
+	
+	var action_data = JSON.parse_string(cleaned_text)
 	if action_data == null or not action_data.has("action"):
 		return
 	_current_enemy.behavior = action_data["action"]
