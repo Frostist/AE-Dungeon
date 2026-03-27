@@ -6,6 +6,7 @@ const GAME_OVER_SCENE: String = "res://scenes/ui/game_over.tscn"  # created in T
 var current_room: Node = null
 
 func _ready() -> void:
+	add_to_group("main")
 	GameState.reset()
 	_load_next_room()
 

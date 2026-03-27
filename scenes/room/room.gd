@@ -17,6 +17,8 @@ const EXIT_COL: int = 2
 
 var exit_locked: bool = true
 var active_enemies: Array = []
+var selected_enemy: CharacterBody2D = null
+var _game_over_triggered: bool = false
 
 signal exit_reached
 
@@ -39,10 +41,32 @@ func _on_exit_door_body_entered(body: Node) -> void:
 		exit_reached.emit()
 
 func _on_attack_pressed() -> void:
-	pass  # implemented in Task 8
+	if selected_enemy and is_instance_valid(selected_enemy):
+		selected_enemy.take_damage(GameState.weapon.damage)
+		hud.refresh()
+		if not is_instance_valid(selected_enemy):
+			selected_enemy = null
+			hud.set_attack_enabled(false)
+			check_exit_unlock()
 
-func _on_player_tapped(_pos: Vector2) -> void:
-	pass  # implemented in Task 8
+func _on_player_tapped(world_pos: Vector2) -> void:
+	if selected_enemy and is_instance_valid(selected_enemy):
+		selected_enemy.set_selected(false)
+	selected_enemy = null
+
+	var nearest_dist: float = 80.0
+	for enemy in active_enemies:
+		if not is_instance_valid(enemy):
+			continue
+		var d: float = enemy.global_position.distance_to(world_pos)
+		if d < nearest_dist:
+			nearest_dist = d
+			selected_enemy = enemy
+
+	if selected_enemy:
+		selected_enemy.set_selected(true)
+
+	hud.set_attack_enabled(selected_enemy != null)
 
 func check_exit_unlock() -> void:
 	if active_enemies.is_empty():
@@ -53,3 +77,21 @@ func populate_grid(grid: Array) -> void:
 	# Called by main.gd after AI generation; for now accepts empty array
 	# Since no enemies exist yet, unlock exit immediately
 	check_exit_unlock()
+
+func _register_enemy(enemy: CharacterBody2D) -> void:
+	active_enemies.append(enemy)
+	enemy.died.connect(_on_enemy_died)
+
+func _on_enemy_died(enemy: CharacterBody2D, gold: int) -> void:
+	active_enemies.erase(enemy)
+	GameState.gold += gold
+	if selected_enemy == enemy:
+		selected_enemy = null
+		hud.set_attack_enabled(false)
+	hud.refresh()
+	check_exit_unlock()
+
+func _process(_delta: float) -> void:
+	if GameState.hp <= 0 and not _game_over_triggered:
+		_game_over_triggered = true
+		get_tree().get_first_node_in_group("main").game_over()
