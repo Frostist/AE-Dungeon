@@ -90,6 +90,7 @@ func populate_grid(grid_data: Dictionary) -> void:
 			var world_pos: Vector2 = grid_to_world(row, col)
 			_spawn_entity(token, world_pos)
 	check_exit_unlock()
+	EnemyAI.register_enemies(active_enemies)
 
 func _spawn_entity(token: String, pos: Vector2) -> void:
 	match token:
