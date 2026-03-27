@@ -1,5 +1,7 @@
 extends Node
 
+const _IRON_SWORD = preload("res://resources/weapons/iron_sword.tres")
+
 var hp: int = 100
 const max_hp: int = 100
 var gold: int = 0
@@ -14,11 +16,11 @@ const ENEMY_STATS: Dictionary = {
 }
 
 func _ready() -> void:
-	weapon = load("res://resources/weapons/iron_sword.tres")
+	weapon = _IRON_SWORD
 
 func reset() -> void:
 	hp = max_hp
 	gold = 0
-	weapon = load("res://resources/weapons/iron_sword.tres")
+	weapon = _IRON_SWORD
 	floor_number = 1
 	room_number = 0
