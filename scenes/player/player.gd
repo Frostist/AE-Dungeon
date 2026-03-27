@@ -42,6 +42,7 @@ func _input(event: InputEvent) -> void:
 						print("Tap detected at: ", world_pos)
 						tapped.emit(world_pos)
 				_is_touching = false
+				_move_dir = Vector2.ZERO
 	elif event is InputEventMouseMotion and _is_touching:
 		var motion := event as InputEventMouseMotion
 		var dist: float = motion.position.distance_to(_touch_start)
