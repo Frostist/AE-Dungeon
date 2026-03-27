@@ -15,6 +15,14 @@ run/main_scene="res://scenes/main.tscn"
 config/features=PackedStringArray("4.6", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+ConfigLoader="*res://autoloads/config_loader.gd"
+GameState="*res://autoloads/game_state.gd"
+RoomGenerator="*res://autoloads/room_generator.gd"
+EnemyAI="*res://autoloads/enemy_ai.gd"
+ChatManager="*res://autoloads/chat_manager.gd"
+
 [display]
 
 window/size/viewport_width=390
@@ -34,14 +42,6 @@ jump={
 [physics]
 
 3d/physics_engine="Jolt Physics"
-
-[autoload]
-
-ConfigLoader="*res://autoloads/config_loader.gd"
-GameState="*res://autoloads/game_state.gd"
-RoomGenerator="*res://autoloads/room_generator.gd"
-EnemyAI="*res://autoloads/enemy_ai.gd"
-ChatManager="*res://autoloads/chat_manager.gd"
 
 [rendering]
 
