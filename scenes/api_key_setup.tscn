@@ -28,6 +28,8 @@ horizontal_alignment = 1
 
 [node name="KeyInput" type="LineEdit" parent="VBoxContainer"]
 placeholder_text = "API key..."
+context_menu_enabled = true
+middle_mouse_paste_enabled = true
 
 [node name="ConfirmButton" type="Button" parent="VBoxContainer"]
 text = "Start Game"
