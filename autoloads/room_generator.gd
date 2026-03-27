@@ -85,6 +85,7 @@ func _on_response(result: int, _code: int, _headers: PackedStringArray, body: Pa
 	room_ready.emit(_validated(grid_data))
 
 func _validated(data: Dictionary) -> Dictionary:
+	data = data.duplicate(true)
 	var grid: Array = data.get("grid", [])
 	while grid.size() < 8:
 		grid.append(["empty","empty","empty","empty","empty","empty"])

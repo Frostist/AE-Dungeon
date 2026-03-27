@@ -57,7 +57,7 @@ func _move_toward(target: Vector2, speed: float, _delta: float) -> void:
 func _move_away_from(target: Vector2, speed: float, _delta: float) -> void:
 	velocity = (global_position - target).normalized() * speed
 
-func _patrol(delta: float) -> void:
+func _patrol(_delta: float) -> void:
 	if _patrol_timer > 2.0:
 		_patrol_timer = 0.0
 		_patrol_dir = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
