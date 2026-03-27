@@ -1,0 +1,40 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scenes/api_key_setup.gd" id="1"]
+
+[node name="ApiKeySetup" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -100.0
+offset_right = 150.0
+offset_bottom = 100.0
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="VBoxContainer"]
+text = "Enter your Gemini API Key"
+horizontal_alignment = 1
+
+[node name="KeyInput" type="LineEdit" parent="VBoxContainer"]
+placeholder_text = "API key..."
+
+[node name="ConfirmButton" type="Button" parent="VBoxContainer"]
+text = "Start Game"
+
+[node name="ErrorLabel" type="Label" parent="VBoxContainer"]
+visible = false
+modulate = Color(1, 0.2, 0.2, 1)
+text = ""
+
+[connection signal="pressed" from="VBoxContainer/ConfirmButton" to="." method="_on_confirm_button_pressed"]
