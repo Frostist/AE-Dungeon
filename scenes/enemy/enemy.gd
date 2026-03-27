@@ -32,6 +32,8 @@ func setup(type: String) -> void:
 	attack_damage = stats["attack"]
 	gold_min = stats["gold_min"]
 	gold_max = stats["gold_max"]
+	var sprite_path: String = "res://assets/sprites/%s.png" % type
+	$Sprite.texture = load(sprite_path)
 	print("Enemy ", type, " spawned with HP: ", hp, "/", max_hp, " at position: ", global_position)
 	_update_hp_bar()
 
