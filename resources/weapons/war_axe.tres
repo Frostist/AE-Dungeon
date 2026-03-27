@@ -3,5 +3,6 @@
 [ext_resource type="Script" path="res://resources/weapons/weapon_resource.gd" id="1"]
 
 [resource]
+script = ExtResource("1")
 weapon_name = "War Axe"
 damage = 30
