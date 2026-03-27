@@ -21,13 +21,17 @@ func _load_next_room() -> void:
 		GameState.room_number = 1
 		GameState.floor_number += 1
 
-	current_room = ROOM_SCENE.instantiate()
+	RoomGenerator.room_ready.connect(_on_room_ready, CONNECT_ONE_SHOT)
+	RoomGenerator.request_room(GameState.floor_number, GameState.room_number)
+
+func _on_room_ready(grid_data: Dictionary) -> void:
+	if current_room and is_instance_valid(current_room):
+		if current_room.has_method("set_door_loading"):
+			current_room.set_door_loading(false)
+	current_room = preload("res://scenes/room/room.tscn").instantiate()
 	add_child(current_room)
 	current_room.exit_reached.connect(_on_exit_reached)
-
-	# Request AI room generation (implemented in Task 9)
-	# For now, load an empty room
-	current_room.populate_grid([])
+	current_room.populate_grid(grid_data)
 
 func _on_exit_reached() -> void:
 	_load_next_room()

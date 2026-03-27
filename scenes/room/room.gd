@@ -1,5 +1,10 @@
 extends Node2D
 
+const ENEMY_SCENE := preload("res://scenes/enemy/enemy.tscn")
+const BOSS_SCENE := preload("res://scenes/enemy/boss.tscn")
+const MERCHANT_SCENE := preload("res://scenes/merchant/merchant.tscn")
+const CHEST_SCENE := preload("res://scenes/chest/chest.tscn")
+
 const GRID_COLS: int = 6
 const GRID_ROWS: int = 8
 const ENTRY_ROW: int = 0
@@ -72,11 +77,60 @@ func check_exit_unlock() -> void:
 	if active_enemies.is_empty():
 		_lock_exit(false)
 
-func populate_grid(grid: Array) -> void:
-	# grid is Array of 8 Arrays of 6 Strings
-	# Called by main.gd after AI generation; for now accepts empty array
-	# Since no enemies exist yet, unlock exit immediately
+func populate_grid(grid_data: Dictionary) -> void:
+	var grid: Array = grid_data.get("grid", [])
+	if grid.is_empty():
+		check_exit_unlock()
+		return
+	for row in grid.size():
+		for col in grid[row].size():
+			var token: String = grid[row][col]
+			if token == "empty":
+				continue
+			var world_pos: Vector2 = grid_to_world(row, col)
+			_spawn_entity(token, world_pos)
 	check_exit_unlock()
+
+func _spawn_entity(token: String, pos: Vector2) -> void:
+	match token:
+		"enemy:goblin", "enemy:skeleton", "enemy:orc":
+			var type: String = token.split(":")[1]
+			var e = ENEMY_SCENE.instantiate()
+			entities.add_child(e)
+			e.setup(type)
+			e.global_position = pos
+			_register_enemy(e)
+		"boss":
+			var b = BOSS_SCENE.instantiate()
+			entities.add_child(b)
+			b.setup_boss(GameState.floor_number)
+			b.global_position = pos
+			_register_enemy(b)
+		"merchant":
+			var m = MERCHANT_SCENE.instantiate()
+			entities.add_child(m)
+			m.global_position = pos
+		"chest":
+			var c = CHEST_SCENE.instantiate()
+			entities.add_child(c)
+			c.global_position = pos
+		"trap":
+			var trap := Area2D.new()
+			var shape := CollisionShape2D.new()
+			shape.shape = RectangleShape2D.new()
+			shape.shape.size = Vector2(16, 16)
+			trap.add_child(shape)
+			var spr := ColorRect.new()
+			spr.size = Vector2(14, 14)
+			spr.color = Color(0.8, 0.1, 0.1)
+			trap.add_child(spr)
+			entities.add_child(trap)
+			trap.global_position = pos
+			trap.body_entered.connect(func(body):
+				if body.is_in_group("player"):
+					body.take_damage(10)
+					trap.queue_free()
+			)
 
 func _register_enemy(enemy: CharacterBody2D) -> void:
 	active_enemies.append(enemy)
