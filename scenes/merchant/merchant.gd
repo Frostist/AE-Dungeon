@@ -9,8 +9,12 @@ const FALLBACK_ITEMS: Array = [
 
 var items: Array = []
 var _http: HTTPRequest
+var _player_nearby: bool = false
+var _chat_active: bool = false
 
 signal shop_ready(items: Array)
+signal chat_started()
+signal chat_ended()
 
 func _ready() -> void:
 	add_to_group("merchants")
@@ -18,7 +22,39 @@ func _ready() -> void:
 	_http.timeout = 6.0
 	add_child(_http)
 	_http.request_completed.connect(_on_response)
+	body_entered.connect(_on_body_entered)
+	body_exited.connect(_on_body_exited)
 	_request_stock()
+
+func _process(_delta: float) -> void:
+	if _player_nearby and Input.is_action_just_pressed("ui_accept"):
+		if not _chat_active:
+			_start_chat()
+		else:
+			_end_chat()
+
+func _on_body_entered(body: Node2D) -> void:
+	if body.is_in_group("player"):
+		_player_nearby = true
+
+func _on_body_exited(body: Node2D) -> void:
+	if body.is_in_group("player"):
+		_player_nearby = false
+		if _chat_active:
+			_end_chat()
+
+func _start_chat() -> void:
+	_chat_active = true
+	ChatManager.start_conversation("Merchant", "merchant")
+	chat_started.emit()
+
+func _end_chat() -> void:
+	_chat_active = false
+	ChatManager.clear_history()
+	chat_ended.emit()
+
+func send_chat_message(message: String) -> void:
+	ChatManager.send_message(message)
 
 func _request_stock() -> void:
 	var weapon_name: String = GameState.weapon.weapon_name if GameState.weapon else "Iron Sword"
