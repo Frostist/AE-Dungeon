@@ -10,14 +10,10 @@ config_version=5
 
 [application]
 
-config/name="Test-Game"
-run/main_scene="res://main.tscn"
+config/name="Dungeon Game"
+run/main_scene=""
 config/features=PackedStringArray("4.6", "Mobile")
 config/icon="res://icon.svg"
-
-[autoload]
-
-GameState="*res://game_state.gd"
 
 [input]
 

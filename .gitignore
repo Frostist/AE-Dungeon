@@ -3,7 +3,5 @@
 /android/
 /export/
 .DS_Store
-user://
 *.import
-export/
 .superpowers/
