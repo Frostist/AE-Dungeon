@@ -13,6 +13,9 @@ var is_dead: bool = false
 
 signal tapped(world_pos: Vector2)
 
+func _ready() -> void:
+	add_to_group("player")
+
 func _input(event: InputEvent) -> void:
 	if is_dead:
 		return
