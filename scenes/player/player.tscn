@@ -16,4 +16,4 @@ offset_left = -8.0
 offset_top = -8.0
 offset_right = 8.0
 offset_bottom = 8.0
-color = Color(1, 0.9, 0.2, 1)
+color = Color(0.2, 1, 0.2, 1)
