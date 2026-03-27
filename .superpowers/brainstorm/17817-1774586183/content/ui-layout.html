@@ -1,0 +1,191 @@
+<h2>UI Layout — Portrait iPhone</h2>
+<p class="subtitle">Three states the player sees. Does this feel right?</p>
+
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:16px;">
+
+  <!-- State 1: Normal room -->
+  <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+    <div class="label">Exploring</div>
+    <div style="width:130px;height:240px;border:3px solid #555;border-radius:16px;background:#1a1008;overflow:hidden;position:relative;font-family:monospace;">
+      <!-- Floor label top -->
+      <div style="position:absolute;top:0;left:0;right:0;height:20px;background:#0a0a0a;border-bottom:1px solid #333;display:flex;align-items:center;justify-content:center;">
+        <span style="color:#aaa;font-size:7px;letter-spacing:2px;">FLOOR 2 · ROOM 3</span>
+      </div>
+      <!-- Room area -->
+      <div style="position:absolute;top:20px;left:0;right:0;bottom:50px;background:#1a1008;overflow:hidden;">
+        <!-- Stone tile pattern -->
+        <div style="position:absolute;inset:0;display:grid;grid-template-columns:repeat(6,1fr);grid-template-rows:repeat(8,1fr);opacity:0.6;">
+          <div style="background:#2a2018"></div><div style="background:#221a10"></div><div style="background:#2a2018"></div><div style="background:#221a10"></div><div style="background:#2a2018"></div><div style="background:#221a10"></div>
+          <div style="background:#221a10"></div><div style="background:#2a2018"></div><div style="background:#221a10"></div><div style="background:#2a2018"></div><div style="background:#221a10"></div><div style="background:#2a2018"></div>
+          <div style="background:#2a2018"></div><div style="background:#221a10"></div><div style="background:#2a2018"></div><div style="background:#221a10"></div><div style="background:#2a2018"></div><div style="background:#221a10"></div>
+          <div style="background:#221a10"></div><div style="background:#2a2018"></div><div style="background:#221a10"></div><div style="background:#2a2018"></div><div style="background:#221a10"></div><div style="background:#2a2018"></div>
+          <div style="background:#2a2018"></div><div style="background:#221a10"></div><div style="background:#2a2018"></div><div style="background:#221a10"></div><div style="background:#2a2018"></div><div style="background:#221a10"></div>
+          <div style="background:#221a10"></div><div style="background:#2a2018"></div><div style="background:#221a10"></div><div style="background:#2a2018"></div><div style="background:#221a10"></div><div style="background:#2a2018"></div>
+          <div style="background:#2a2018"></div><div style="background:#221a10"></div><div style="background:#2a2018"></div><div style="background:#221a10"></div><div style="background:#2a2018"></div><div style="background:#221a10"></div>
+          <div style="background:#221a10"></div><div style="background:#2a2018"></div><div style="background:#221a10"></div><div style="background:#2a2018"></div><div style="background:#221a10"></div><div style="background:#2a2018"></div>
+        </div>
+        <!-- Walls -->
+        <div style="position:absolute;top:0;left:0;right:0;height:6px;background:#3d3020;border-bottom:1px solid #1a1008"></div>
+        <div style="position:absolute;top:0;left:0;bottom:0;width:6px;background:#3d3020"></div>
+        <div style="position:absolute;top:0;right:0;bottom:0;width:6px;background:#3d3020"></div>
+        <!-- Door (bottom center) -->
+        <div style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:16px;height:6px;background:#5a3e1a;border:1px solid #8B6914"></div>
+        <!-- Torch dots -->
+        <div style="position:absolute;top:4px;left:12px;width:3px;height:3px;background:#ff9900;border-radius:50%;box-shadow:0 0 4px #ff9900"></div>
+        <div style="position:absolute;top:4px;right:12px;width:3px;height:3px;background:#ff9900;border-radius:50%;box-shadow:0 0 4px #ff9900"></div>
+        <!-- Player -->
+        <div style="position:absolute;top:90px;left:55px;width:9px;height:11px;">
+          <div style="position:absolute;top:0;left:1px;width:7px;height:4px;background:#ffcc88"></div>
+          <div style="position:absolute;top:4px;left:0;width:9px;height:7px;background:#4488ff"></div>
+        </div>
+        <!-- Enemy skeleton -->
+        <div style="position:absolute;top:30px;left:20px;width:9px;height:11px;">
+          <div style="position:absolute;top:0;left:1px;width:7px;height:4px;background:#dddddd"></div>
+          <div style="position:absolute;top:4px;left:0;width:9px;height:7px;background:#aaaaaa"></div>
+        </div>
+        <!-- Chest -->
+        <div style="position:absolute;top:50px;left:88px;width:9px;height:7px;background:#8B6914;border:1px solid #ffd700"></div>
+        <!-- Swipe hint -->
+        <div style="position:absolute;bottom:12px;left:50%;transform:translateX(-50%);color:#554433;font-size:5px;white-space:nowrap;">swipe to move</div>
+      </div>
+      <!-- HUD bottom -->
+      <div style="position:absolute;bottom:0;left:0;right:0;height:50px;background:#0a0805;border-top:2px solid #3d3020;display:flex;align-items:center;padding:0 8px;justify-content:space-between;">
+        <div>
+          <div style="color:#cc4444;font-size:6px;letter-spacing:1px;margin-bottom:2px;">HP</div>
+          <div style="width:50px;height:6px;background:#330000;border:1px solid #660000;border-radius:1px;">
+            <div style="width:70%;height:100%;background:#cc2222;border-radius:1px"></div>
+          </div>
+          <div style="color:#886622;font-size:5px;margin-top:2px;">⚔ Iron Sword</div>
+        </div>
+        <div style="width:28px;height:28px;background:#8B1a1a;border:2px solid #cc3333;border-radius:4px;display:flex;align-items:center;justify-content:center;color:#ff6666;font-size:11px;">⚔</div>
+      </div>
+    </div>
+    <p style="font-size:11px;color:#aaa;text-align:center;max-width:130px;">Free swipe movement. Attack button always visible bottom-right.</p>
+  </div>
+
+  <!-- State 2: Combat + Chat -->
+  <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+    <div class="label">In Combat / Chat</div>
+    <div style="width:130px;height:240px;border:3px solid #555;border-radius:16px;background:#1a1008;overflow:hidden;position:relative;font-family:monospace;">
+      <!-- Floor label -->
+      <div style="position:absolute;top:0;left:0;right:0;height:20px;background:#0a0a0a;border-bottom:1px solid #333;display:flex;align-items:center;justify-content:center;">
+        <span style="color:#aaa;font-size:7px;letter-spacing:2px;">FLOOR 2 · ROOM 3</span>
+      </div>
+      <!-- Room (dimmed) -->
+      <div style="position:absolute;top:20px;left:0;right:0;bottom:50px;background:#0d0804;overflow:hidden;opacity:0.7;">
+        <div style="position:absolute;inset:0;display:grid;grid-template-columns:repeat(6,1fr);grid-template-rows:repeat(8,1fr);opacity:0.4;">
+          <div style="background:#2a2018"></div><div style="background:#221a10"></div><div style="background:#2a2018"></div><div style="background:#221a10"></div><div style="background:#2a2018"></div><div style="background:#221a10"></div>
+          <div style="background:#221a10"></div><div style="background:#2a2018"></div><div style="background:#221a10"></div><div style="background:#2a2018"></div><div style="background:#221a10"></div><div style="background:#2a2018"></div>
+          <div style="background:#2a2018"></div><div style="background:#221a10"></div><div style="background:#2a2018"></div><div style="background:#221a10"></div><div style="background:#2a2018"></div><div style="background:#221a10"></div>
+          <div style="background:#221a10"></div><div style="background:#2a2018"></div><div style="background:#221a10"></div><div style="background:#2a2018"></div><div style="background:#221a10"></div><div style="background:#2a2018"></div>
+          <div style="background:#2a2018"></div><div style="background:#221a10"></div><div style="background:#2a2018"></div><div style="background:#221a10"></div><div style="background:#2a2018"></div><div style="background:#221a10"></div>
+          <div style="background:#221a10"></div><div style="background:#2a2018"></div><div style="background:#221a10"></div><div style="background:#2a2018"></div><div style="background:#221a10"></div><div style="background:#2a2018"></div>
+          <div style="background:#2a2018"></div><div style="background:#221a10"></div><div style="background:#2a2018"></div><div style="background:#221a10"></div><div style="background:#2a2018"></div><div style="background:#221a10"></div>
+          <div style="background:#221a10"></div><div style="background:#2a2018"></div><div style="background:#221a10"></div><div style="background:#2a2018"></div><div style="background:#221a10"></div><div style="background:#2a2018"></div>
+        </div>
+        <!-- Selected enemy (highlighted) -->
+        <div style="position:absolute;top:28px;left:18px;width:13px;height:15px;border:1px solid #ffcc00;border-radius:1px;">
+          <div style="position:absolute;top:1px;left:2px;width:7px;height:4px;background:#dddddd"></div>
+          <div style="position:absolute;top:5px;left:1px;width:9px;height:7px;background:#aaaaaa"></div>
+        </div>
+        <!-- Enemy HP bar -->
+        <div style="position:absolute;top:18px;left:14px;width:22px;height:3px;background:#330000;border:1px solid #660000;">
+          <div style="width:55%;height:100%;background:#cc2222"></div>
+        </div>
+        <!-- Player -->
+        <div style="position:absolute;top:88px;left:53px;width:9px;height:11px;">
+          <div style="position:absolute;top:0;left:1px;width:7px;height:4px;background:#ffcc88"></div>
+          <div style="position:absolute;top:4px;left:0;width:9px;height:7px;background:#4488ff"></div>
+        </div>
+      </div>
+      <!-- Chat overlay (slides up ~40% height) -->
+      <div style="position:absolute;bottom:50px;left:0;right:0;height:90px;background:#0e0b06;border-top:2px solid #5a3e1a;border-radius:0;">
+        <div style="padding:4px 6px;border-bottom:1px solid #2a2010;">
+          <span style="color:#cc9944;font-size:6px;letter-spacing:1px;">SKELETON GUARD</span>
+          <span style="color:#554433;font-size:5px;margin-left:4px;">· Talk / Fight</span>
+        </div>
+        <div style="padding:4px 6px;display:flex;flex-direction:column;gap:2px;">
+          <div style="color:#888;font-size:5px;font-style:italic;">"You dare enter my chamber, fool?"</div>
+          <div style="color:#4488ff;font-size:5px;">"I seek passage, not a fight."</div>
+          <div style="color:#888;font-size:5px;font-style:italic;">"Hmm... bring me 10 gold and I shall let you pass..."</div>
+        </div>
+        <div style="position:absolute;bottom:3px;left:4px;right:4px;display:flex;gap:2px;">
+          <div style="flex:1;background:#1a1208;border:1px solid #3d3020;height:11px;border-radius:2px;display:flex;align-items:center;padding:0 3px;">
+            <span style="color:#554433;font-size:5px;">type a reply...</span>
+          </div>
+          <div style="width:11px;height:11px;background:#5a3e1a;border:1px solid #8B6914;border-radius:2px;display:flex;align-items:center;justify-content:center;color:#ffd700;font-size:6px;">→</div>
+        </div>
+      </div>
+      <!-- HUD bottom -->
+      <div style="position:absolute;bottom:0;left:0;right:0;height:50px;background:#0a0805;border-top:2px solid #3d3020;display:flex;align-items:center;padding:0 8px;justify-content:space-between;">
+        <div>
+          <div style="color:#cc4444;font-size:6px;letter-spacing:1px;margin-bottom:2px;">HP</div>
+          <div style="width:50px;height:6px;background:#330000;border:1px solid #660000;border-radius:1px;">
+            <div style="width:70%;height:100%;background:#cc2222;border-radius:1px"></div>
+          </div>
+          <div style="color:#886622;font-size:5px;margin-top:2px;">⚔ Iron Sword</div>
+        </div>
+        <div style="width:28px;height:28px;background:#8B1a1a;border:2px solid #cc3333;border-radius:4px;display:flex;align-items:center;justify-content:center;color:#ff6666;font-size:11px;">⚔</div>
+      </div>
+    </div>
+    <p style="font-size:11px;color:#aaa;text-align:center;max-width:130px;">Chat slides up. Enemy HP shown above them. Attack button stays active.</p>
+  </div>
+
+  <!-- State 3: Merchant shop -->
+  <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+    <div class="label">Merchant Shop</div>
+    <div style="width:130px;height:240px;border:3px solid #555;border-radius:16px;background:#1a1008;overflow:hidden;position:relative;font-family:monospace;">
+      <!-- Floor label -->
+      <div style="position:absolute;top:0;left:0;right:0;height:20px;background:#0a0a0a;border-bottom:1px solid #333;display:flex;align-items:center;justify-content:center;">
+        <span style="color:#aaa;font-size:7px;letter-spacing:2px;">FLOOR 2 · ROOM 3</span>
+      </div>
+      <!-- Room behind -->
+      <div style="position:absolute;top:20px;left:0;right:0;bottom:0;background:#0d0804;opacity:0.4;"></div>
+      <!-- Shop modal -->
+      <div style="position:absolute;top:24px;left:6px;right:6px;bottom:6px;background:#110e07;border:2px solid #8B6914;border-radius:4px;overflow:hidden;">
+        <div style="background:#1a1408;border-bottom:1px solid #5a3e1a;padding:4px 6px;display:flex;justify-content:space-between;align-items:center;">
+          <span style="color:#ffd700;font-size:7px;letter-spacing:1px;">MERCHANT</span>
+          <span style="color:#aaa;font-size:6px;">💰 45g</span>
+        </div>
+        <!-- Items -->
+        <div style="padding:4px;display:flex;flex-direction:column;gap:3px;">
+          <div style="background:#1a1208;border:1px solid #3d3020;border-radius:2px;padding:3px 4px;display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <div style="color:#ffcc66;font-size:6px;">Steel Sword</div>
+              <div style="color:#666;font-size:5px;">+15 ATK</div>
+            </div>
+            <div style="background:#3d2800;border:1px solid #8B6914;border-radius:2px;padding:1px 3px;color:#ffd700;font-size:5px;">30g</div>
+          </div>
+          <div style="background:#1a1208;border:1px solid #3d3020;border-radius:2px;padding:3px 4px;display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <div style="color:#ff6666;font-size:6px;">Health Potion</div>
+              <div style="color:#666;font-size:5px;">+50 HP</div>
+            </div>
+            <div style="background:#3d2800;border:1px solid #8B6914;border-radius:2px;padding:1px 3px;color:#ffd700;font-size:5px;">15g</div>
+          </div>
+          <div style="background:#1a1208;border:1px solid #3d3020;border-radius:2px;padding:3px 4px;display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <div style="color:#88aaff;font-size:6px;">Map Scroll</div>
+              <div style="color:#666;font-size:5px;">Reveals next room</div>
+            </div>
+            <div style="background:#3d2800;border:1px solid #8B6914;border-radius:2px;padding:1px 3px;color:#ffd700;font-size:5px;">20g</div>
+          </div>
+        </div>
+        <!-- Chat with merchant -->
+        <div style="position:absolute;bottom:0;left:0;right:0;border-top:1px solid #3d3020;padding:3px 4px;background:#0e0b06;">
+          <div style="color:#cc9944;font-size:5px;font-style:italic;margin-bottom:2px;">"Finest goods in the dungeon, friend."</div>
+          <div style="display:flex;gap:2px;">
+            <div style="flex:1;background:#1a1208;border:1px solid #3d3020;height:10px;border-radius:2px;display:flex;align-items:center;padding:0 3px;">
+              <span style="color:#554433;font-size:5px;">haggle...</span>
+            </div>
+            <div style="width:10px;height:10px;background:#5a3e1a;border:1px solid #8B6914;border-radius:2px;display:flex;align-items:center;justify-content:center;color:#ffd700;font-size:5px;">→</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p style="font-size:11px;color:#aaa;text-align:center;max-width:130px;">Modal shop with items + inline chat to haggle with the merchant.</p>
+  </div>
+
+</div>
+
+<p class="subtitle" style="margin-top:20px;">Three game states: Exploring → Combat/Chat → Shop. Does this layout feel right?</p>
