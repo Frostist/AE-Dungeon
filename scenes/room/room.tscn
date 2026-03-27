@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=11 format=3]
 
 [ext_resource type="Script" path="res://scenes/room/room.gd" id="1"]
 [ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="2"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="3"]
 [ext_resource type="PackedScene" path="res://scenes/ui/chat_overlay.tscn" id="chat_overlay_1"]
+[ext_resource type="PackedScene" path="res://scenes/ui/shop_overlay.tscn" id="shop_overlay_1"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(16, 24)
@@ -105,3 +106,5 @@ shape = SubResource("5")
 position = Vector2(144, 64)
 
 [node name="ChatOverlay" parent="." instance=ExtResource("chat_overlay_1")]
+
+[node name="ShopOverlay" parent="." instance=ExtResource("shop_overlay_1")]

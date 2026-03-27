@@ -20,6 +20,7 @@ const EXIT_COL: int = 2
 @onready var hud = $HUD
 @onready var player = $Player
 @onready var chat_overlay = $ChatOverlay
+@onready var shop_overlay = $ShopOverlay
 
 var exit_locked: bool = true
 var active_enemies: Array = []
@@ -58,6 +59,16 @@ func _on_attack_pressed() -> void:
 			check_exit_unlock()
 
 func _on_player_tapped(world_pos: Vector2) -> void:
+	# Check for merchant tap first
+	for merchant in get_tree().get_nodes_in_group("merchants"):
+		if merchant.global_position.distance_to(world_pos) < 40.0:
+			if not merchant.items.is_empty():
+				shop_overlay.open_with_items(merchant.items)
+			else:
+				if not merchant.shop_ready.is_connected(_on_merchant_shop_ready):
+					merchant.shop_ready.connect(_on_merchant_shop_ready, CONNECT_ONE_SHOT)
+			return
+	# Deselect previous
 	if selected_enemy and is_instance_valid(selected_enemy):
 		selected_enemy.set_selected(false)
 	selected_enemy = null
@@ -157,6 +168,9 @@ func _on_player_long_tapped(world_pos: Vector2) -> void:
 			var type_label: String = enemy.enemy_type.capitalize()
 			chat_overlay.open_for("Dungeon %s" % type_label, enemy.enemy_type)
 			return
+
+func _on_merchant_shop_ready(items: Array) -> void:
+	shop_overlay.open_with_items(items)
 
 func _process(_delta: float) -> void:
 	if GameState.hp <= 0 and not _game_over_triggered:
