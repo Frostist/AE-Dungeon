@@ -47,3 +47,9 @@ func _on_player_tapped(_pos: Vector2) -> void:
 func check_exit_unlock() -> void:
 	if active_enemies.is_empty():
 		_lock_exit(false)
+
+func populate_grid(grid: Array) -> void:
+	# grid is Array of 8 Arrays of 6 Strings
+	# Called by main.gd after AI generation; for now accepts empty array
+	# Since no enemies exist yet, unlock exit immediately
+	check_exit_unlock()
