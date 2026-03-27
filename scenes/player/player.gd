@@ -25,6 +25,12 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		var mouse_event := event as InputEventMouseButton
 		if mouse_event.button_index == MOUSE_BUTTON_LEFT:
+			# Check if click is on a UI element (bottom 100 pixels of screen for UI)
+			var viewport_height = get_viewport().get_visible_rect().size.y
+			if mouse_event.position.y > viewport_height - 100:
+				# Click is in UI area, ignore it
+				return
+			
 			if mouse_event.pressed:
 				_touch_start = mouse_event.position
 				_touch_time = 0.0

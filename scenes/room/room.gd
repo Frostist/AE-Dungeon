@@ -52,12 +52,15 @@ func _on_exit_door_body_entered(body: Node) -> void:
 
 func _on_attack_pressed() -> void:
 	if selected_enemy and is_instance_valid(selected_enemy):
+		print("Player attacking with ", GameState.weapon.weapon_name, " (", GameState.weapon.damage, " damage)")
 		selected_enemy.take_damage(GameState.weapon.damage)
 		hud.refresh()
 		if not is_instance_valid(selected_enemy):
 			selected_enemy = null
 			hud.set_attack_enabled(false)
 			check_exit_unlock()
+	else:
+		print("Attack pressed but no valid enemy selected")
 
 func _on_player_tapped(world_pos: Vector2) -> void:
 	# Check for merchant tap first
@@ -80,20 +83,26 @@ func _on_player_tapped(world_pos: Vector2) -> void:
 
 	# Deselect previous
 	if selected_enemy and is_instance_valid(selected_enemy):
+		print("Deselecting previous enemy: ", selected_enemy.enemy_type)
 		selected_enemy.set_selected(false)
 	selected_enemy = null
 
+	print("Tap at world position: ", world_pos, " - Searching for enemies within 80 units")
 	var nearest_dist: float = 80.0
 	for enemy in active_enemies:
 		if not is_instance_valid(enemy):
 			continue
 		var d: float = enemy.global_position.distance_to(world_pos)
+		print("  Enemy ", enemy.enemy_type, " at ", enemy.global_position, " - distance: ", d)
 		if d < nearest_dist:
 			nearest_dist = d
 			selected_enemy = enemy
 
 	if selected_enemy:
+		print("Selected enemy: ", selected_enemy.enemy_type, " at distance ", nearest_dist)
 		selected_enemy.set_selected(true)
+	else:
+		print("No enemy selected (none within range)")
 
 	hud.set_attack_enabled(selected_enemy != null)
 

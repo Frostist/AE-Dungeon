@@ -19,6 +19,9 @@ func refresh() -> void:
 
 func set_attack_enabled(enabled: bool) -> void:
 	attack_button.disabled = not enabled
+	print("Attack button ", "ENABLED" if enabled else "DISABLED")
 
 func _on_attack_pressed() -> void:
+	print("!!! ATTACK BUTTON CLICKED !!!")
 	attack_pressed.emit()
+	print("Attack signal emitted")

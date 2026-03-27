@@ -32,6 +32,7 @@ func setup(type: String) -> void:
 	attack_damage = stats["attack"]
 	gold_min = stats["gold_min"]
 	gold_max = stats["gold_max"]
+	print("Enemy ", type, " spawned with HP: ", hp, "/", max_hp, " at position: ", global_position)
 	_update_hp_bar()
 
 func _physics_process(delta: float) -> void:
@@ -69,9 +70,11 @@ func _try_attack(player: Node) -> void:
 		player.take_damage(attack_damage)
 
 func take_damage(amount: int) -> void:
+	print("Enemy ", enemy_type, " took ", amount, " damage. HP: ", hp, " -> ", max(0, hp - amount))
 	hp = max(0, hp - amount)
 	_update_hp_bar()
 	if hp == 0:
+		print("Enemy ", enemy_type, " died!")
 		_die()
 
 func _die() -> void:
@@ -85,4 +88,6 @@ func set_selected(selected: bool) -> void:
 
 func _update_hp_bar() -> void:
 	var pct: float = float(hp) / float(max_hp)
-	$HPBarContainer/HPBarFill.size.x = 20.0 * pct
+	var new_width: float = 20.0 * pct
+	print("  Updating HP bar for ", enemy_type, ": ", hp, "/", max_hp, " (", pct * 100, "%) - bar width: ", new_width)
+	$HPBarContainer/HPBarFill.size.x = new_width
