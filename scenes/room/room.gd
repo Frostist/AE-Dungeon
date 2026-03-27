@@ -68,6 +68,15 @@ func _on_player_tapped(world_pos: Vector2) -> void:
 				if not merchant.shop_ready.is_connected(_on_merchant_shop_ready):
 					merchant.shop_ready.connect(_on_merchant_shop_ready, CONNECT_ONE_SHOT)
 			return
+	# Check for chest tap
+	for chest in get_tree().get_nodes_in_group("chests"):
+		if chest.global_position.distance_to(world_pos) < 40.0:
+			var loot_msg: String = chest.open()
+			if not loot_msg.is_empty():
+				print("Loot: ", loot_msg)
+				hud.refresh()
+			return
+
 	# Deselect previous
 	if selected_enemy and is_instance_valid(selected_enemy):
 		selected_enemy.set_selected(false)

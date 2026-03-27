@@ -57,7 +57,13 @@ func _buy(item: Dictionary, btn: Button) -> void:
 		"health_potion":
 			GameState.hp = min(GameState.hp + 50, GameState.max_hp)
 		"map_scroll":
-			pass  # implemented in Task 14
+			var preview_room: int = GameState.room_number + 1
+			var preview_floor: int = GameState.floor_number
+			if preview_room > 5:
+				preview_room = 1
+				preview_floor += 1
+			RoomGenerator.room_ready.connect(_on_preview_ready, CONNECT_ONE_SHOT)
+			RoomGenerator.request_room(preview_floor, preview_room)
 		_:
 			if WEAPON_MAP.has(item["type"]):
 				GameState.weapon = load(WEAPON_MAP[item["type"]])
@@ -72,3 +78,9 @@ func _on_chat_send() -> void:
 
 func _on_merchant_reply(text: String) -> void:
 	merchant_line.text = '"%s"' % text
+
+func _on_preview_ready(grid_data: Dictionary) -> void:
+	merchant_line.text = '"Ahead: %s — %s"' % [
+		grid_data.get("room_type", "???").capitalize(),
+		grid_data.get("description", "")
+	]
