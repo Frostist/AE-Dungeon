@@ -4,6 +4,7 @@ const PLAYER_SPEED: float = 180.0
 const DEAD_ZONE: float = 10.0
 const TAP_TIME: float = 0.15
 const TAP_MAX_DIST: float = 10.0
+const LONG_TAP_TIME: float = 0.4
 
 var _touch_start: Vector2 = Vector2.ZERO
 var _touch_time: float = 0.0
@@ -12,6 +13,7 @@ var _move_dir: Vector2 = Vector2.ZERO
 var is_dead: bool = false
 
 signal tapped(world_pos: Vector2)
+signal long_tapped(world_pos: Vector2)
 
 func _ready() -> void:
 	add_to_group("player")
@@ -26,9 +28,11 @@ func _input(event: InputEvent) -> void:
 			_is_touching = true
 			_move_dir = Vector2.ZERO
 		else:
-			if _is_touching and _touch_time < TAP_TIME and \
-			   event.position.distance_to(_touch_start) < TAP_MAX_DIST:
-				tapped.emit(get_global_mouse_position())
+			if _is_touching and event.position.distance_to(_touch_start) < TAP_MAX_DIST:
+				if _touch_time >= LONG_TAP_TIME:
+					long_tapped.emit(get_global_mouse_position())
+				else:
+					tapped.emit(get_global_mouse_position())
 			_is_touching = false
 			_move_dir = Vector2.ZERO
 	elif event is InputEventScreenDrag and _is_touching:

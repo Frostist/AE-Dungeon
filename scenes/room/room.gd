@@ -19,6 +19,7 @@ const EXIT_COL: int = 2
 @onready var exit_door: Area2D = $ExitDoor
 @onready var hud = $HUD
 @onready var player = $Player
+@onready var chat_overlay = $ChatOverlay
 
 var exit_locked: bool = true
 var active_enemies: Array = []
@@ -31,6 +32,8 @@ func _ready() -> void:
 	exit_door.body_entered.connect(_on_exit_door_body_entered)
 	hud.attack_pressed.connect(_on_attack_pressed)
 	player.tapped.connect(_on_player_tapped)
+	player.long_tapped.connect(_on_player_long_tapped)
+	chat_overlay.closed.connect(func(): pass)
 	_lock_exit(true)
 	hud.refresh()
 
@@ -145,6 +148,15 @@ func _on_enemy_died(enemy: CharacterBody2D, gold: int) -> void:
 		hud.set_attack_enabled(false)
 	hud.refresh()
 	check_exit_unlock()
+
+func _on_player_long_tapped(world_pos: Vector2) -> void:
+	for enemy in active_enemies:
+		if is_instance_valid(enemy) and enemy.global_position.distance_to(world_pos) < 80.0:
+			if enemy.enemy_type == "boss":
+				return
+			var type_label: String = enemy.enemy_type.capitalize()
+			chat_overlay.open_for("Dungeon %s" % type_label, enemy.enemy_type)
+			return
 
 func _process(_delta: float) -> void:
 	if GameState.hp <= 0 and not _game_over_triggered:

@@ -33,6 +33,7 @@ ConfigLoader="*res://autoloads/config_loader.gd"
 GameState="*res://autoloads/game_state.gd"
 RoomGenerator="*res://autoloads/room_generator.gd"
 EnemyAI="*res://autoloads/enemy_ai.gd"
+ChatManager="*res://autoloads/chat_manager.gd"
 
 [rendering]
 
