@@ -41,6 +41,8 @@ func _on_send() -> void:
 	ChatManager.send_message(msg)
 
 func _on_response_ready(text: String) -> void:
+	if not visible:
+		return
 	send_button.disabled = false
 	_start_typing(text)
 

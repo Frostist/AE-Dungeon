@@ -62,7 +62,7 @@ func _on_attack_pressed() -> void:
 func _on_player_tapped(world_pos: Vector2) -> void:
 	# Check for merchant tap first
 	for merchant in get_tree().get_nodes_in_group("merchants"):
-		if merchant.global_position.distance_to(world_pos) < 40.0:
+		if merchant.global_position.distance_to(world_pos) < 64.0:
 			if not merchant.items.is_empty():
 				shop_overlay.open_with_items(merchant.items)
 			else:
@@ -71,7 +71,7 @@ func _on_player_tapped(world_pos: Vector2) -> void:
 			return
 	# Check for chest tap
 	for chest in get_tree().get_nodes_in_group("chests"):
-		if chest.global_position.distance_to(world_pos) < 40.0:
+		if chest.global_position.distance_to(world_pos) < 64.0:
 			var loot_msg: String = chest.open()
 			if not loot_msg.is_empty():
 				print("Loot: ", loot_msg)

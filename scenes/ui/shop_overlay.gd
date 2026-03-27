@@ -77,6 +77,8 @@ func _on_chat_send() -> void:
 	ChatManager.send_message(msg)
 
 func _on_merchant_reply(text: String) -> void:
+	if not visible:
+		return
 	merchant_line.text = '"%s"' % text
 
 func _on_preview_ready(grid_data: Dictionary) -> void:

@@ -4,10 +4,10 @@ var _taunt_bonus_active: bool = false
 
 func setup_boss(floor_num: int) -> void:
 	enemy_type = "boss"
-	var boss_floor: int = floor_num / 5
-	hp = 150 + boss_floor * 30
+	var boss_tier: int = (floor_num - 5) / 5  # 0 at floor 5, 1 at floor 10, etc.
+	hp = 150 + boss_tier * 30
 	max_hp = hp
-	attack_damage = 20 + boss_floor * 5
+	attack_damage = 20 + boss_tier * 5
 	gold_min = 50
 	gold_max = 100
 	_update_hp_bar()

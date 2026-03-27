@@ -29,10 +29,11 @@ func _input(event: InputEvent) -> void:
 			_move_dir = Vector2.ZERO
 		else:
 			if _is_touching and event.position.distance_to(_touch_start) < TAP_MAX_DIST:
+				var world_pos := get_viewport().get_canvas_transform().affine_inverse() * event.position
 				if _touch_time >= LONG_TAP_TIME:
-					long_tapped.emit(get_global_mouse_position())
+					long_tapped.emit(world_pos)
 				else:
-					tapped.emit(get_global_mouse_position())
+					tapped.emit(world_pos)
 			_is_touching = false
 			_move_dir = Vector2.ZERO
 	elif event is InputEventScreenDrag and _is_touching:

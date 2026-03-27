@@ -37,7 +37,7 @@ func send_message(player_message: String) -> void:
 	)
 
 	var body: Dictionary = {
-		"system_instruction": {"parts": [{"text": system_text}]},
+		"systemInstruction": {"parts": [{"text": system_text}]},
 		"contents": _history
 	}
 	var url: String = API_URL + "?key=" + ConfigLoader.gemini_api_key

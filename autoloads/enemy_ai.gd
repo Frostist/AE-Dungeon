@@ -50,12 +50,21 @@ func _poll_enemy(enemy: CharacterBody2D) -> void:
 
 	var is_boss: bool = enemy.enemy_type == "boss"
 	var action_options: String = "attack | taunt | charge" if is_boss else "attack | patrol | flee"
-	var prompt: String = (
-		"Enemy: %s. HP: %d/%d. Player distance: %.1f tiles. " % [
-			enemy.enemy_type, enemy.hp, enemy.max_hp, dist] +
-		"Player HP: %d. Current behavior: %s. " % [GameState.hp, enemy.behavior] +
-		"Return ONLY JSON: { \"action\": \"%s\" }" % action_options
-	)
+	var prompt: String
+	if is_boss:
+		prompt = (
+			"You are a powerful dungeon boss on floor %d. HP: %d/%d. " % [GameState.floor_number, enemy.hp, enemy.max_hp] +
+			"Player HP: %d. Player distance: %.1f tiles. Current behavior: %s. " % [GameState.hp, dist, enemy.behavior] +
+			"Be aggressive and unpredictable. Use taunt to power up your next attack, charge to close distance fast. " +
+			"Return ONLY JSON: { \"action\": \"%s\" }" % action_options
+		)
+	else:
+		prompt = (
+			"Enemy: %s. HP: %d/%d. Player distance: %.1f tiles. " % [
+				enemy.enemy_type, enemy.hp, enemy.max_hp, dist] +
+			"Player HP: %d. Current behavior: %s. " % [GameState.hp, enemy.behavior] +
+			"Return ONLY JSON: { \"action\": \"%s\" }" % action_options
+		)
 
 	var body: Dictionary = {
 		"contents": [{"role": "user", "parts": [{"text": prompt}]}]
