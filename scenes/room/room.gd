@@ -30,6 +30,7 @@ var _game_over_triggered: bool = false
 signal exit_reached
 
 func _ready() -> void:
+	# TODO Task 14: Add PointLight2D torch nodes in editor (need circle gradient texture)
 	exit_door.body_entered.connect(_on_exit_door_body_entered)
 	hud.attack_pressed.connect(_on_attack_pressed)
 	player.tapped.connect(_on_player_tapped)
