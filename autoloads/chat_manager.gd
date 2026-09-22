@@ -1,6 +1,6 @@
 extends Node
 
-const API_URL: String = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent"
+const API_URL: String = "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent"
 const HISTORY_LIMIT: int = 10
 const TYPING_SPEED: float = 40.0
 

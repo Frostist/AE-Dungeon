@@ -1,15 +1,17 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene format=3 uid="uid://3advyjwqtqlr"]
 
-[ext_resource type="Script" path="res://scenes/api_key_setup.gd" id="1"]
+[ext_resource type="Script" uid="uid://bcju5ixlcs4hx" path="res://scenes/api_key_setup.gd" id="1"]
 
-[node name="ApiKeySetup" type="Control"]
+[node name="ApiKeySetup" type="Control" unique_id=125358168]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=489431236]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -20,23 +22,26 @@ offset_left = -150.0
 offset_top = -100.0
 offset_right = 150.0
 offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
 alignment = 1
 
-[node name="TitleLabel" type="Label" parent="VBoxContainer"]
+[node name="TitleLabel" type="Label" parent="VBoxContainer" unique_id=87572159]
+layout_mode = 2
 text = "Enter your Gemini API Key"
 horizontal_alignment = 1
 
-[node name="KeyInput" type="LineEdit" parent="VBoxContainer"]
+[node name="KeyInput" type="LineEdit" parent="VBoxContainer" unique_id=785414617]
+layout_mode = 2
 placeholder_text = "API key..."
-context_menu_enabled = true
-middle_mouse_paste_enabled = true
 
-[node name="ConfirmButton" type="Button" parent="VBoxContainer"]
+[node name="ConfirmButton" type="Button" parent="VBoxContainer" unique_id=1622810579]
+layout_mode = 2
 text = "Start Game"
 
-[node name="ErrorLabel" type="Label" parent="VBoxContainer"]
+[node name="ErrorLabel" type="Label" parent="VBoxContainer" unique_id=1655280722]
 visible = false
 modulate = Color(1, 0.2, 0.2, 1)
-text = ""
+layout_mode = 2
 
 [connection signal="pressed" from="VBoxContainer/ConfirmButton" to="." method="_on_confirm_button_pressed"]

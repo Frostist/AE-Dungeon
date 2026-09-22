@@ -2,7 +2,7 @@ extends Node
 
 signal room_ready(grid_data: Dictionary)
 
-const API_URL: String = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent"
+const API_URL: String = "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent"
 const TIMEOUT: float = 8.0
 
 var _http: HTTPRequest
